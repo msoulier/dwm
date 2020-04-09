@@ -1248,7 +1248,16 @@ propertynotify(XEvent *e)
 void
 quit(const Arg *arg)
 {
-	running = 0;
+    int rv = system("dmenu_logout");
+    if (rv < 0) {
+        perror("quit");
+    } else {
+        if (WIFEXITED(rv)) {
+            if (WEXITSTATUS(rv) == 0) {
+                running = 0;
+            }
+        }
+    }
 }
 
 Monitor *
