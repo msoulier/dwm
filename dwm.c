@@ -142,6 +142,10 @@ typedef struct {
 	int monitor;
 } Rule;
 
+
+// The path to our binary
+char *prog = NULL;
+
 /* function declarations */
 static void applyrules(Client *c);
 static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact);
@@ -188,6 +192,7 @@ static Client *nexttiled(Client *c);
 static void pop(Client *);
 static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
+static void restart(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
 static void resizeclient(Client *c, int x, int y, int w, int h);
@@ -2168,6 +2173,12 @@ zoom(const Arg *arg)
 	pop(c);
 }
 
+void
+restart(const Arg *arg)
+{
+    if (prog != NULL) execl(prog, prog, NULL);
+}
+
 int
 main(int argc, char *argv[])
 {
@@ -2179,6 +2190,10 @@ main(int argc, char *argv[])
 		fputs("warning: no locale support\n", stderr);
 	if (!(dpy = XOpenDisplay(NULL)))
 		die("dwm: cannot open display");
+
+    // Store a global copy of the path to our binary for the restart command
+    prog = argv[0];
+
 	checkotherwm();
 	setup();
 #ifdef __OpenBSD__
