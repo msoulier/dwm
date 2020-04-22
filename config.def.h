@@ -80,7 +80,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "/usr/bin/x-terminal-emulator", NULL };
 static const char *lockcmd[]  = { "slock", NULL };
 static const char *volcmd[]  = { "pavucontrol", NULL };
-static const char *worktermcmd[]  = { "/usr/bin/x-terminal-emulator", "-e", "cappuccino", NULL };
+static const char *worktermcmd[]  = { "/usr/bin/x-terminal-emulator", "-e", "ssh", "cappuccino", NULL };
+static const char *rangercmd[]  = { "/usr/bin/x-terminal-emulator", "-e", "ranger", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -89,6 +90,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
 	{ MODKEY|ControlMask,           XK_w,      spawn,          {.v = worktermcmd } },
 	{ MODKEY|ControlMask,           XK_v,      spawn,          {.v = volcmd } },
+	{ MODKEY|ControlMask,           XK_e,      spawn,          {.v = rangercmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
