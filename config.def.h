@@ -89,7 +89,7 @@ static const char *rangercmd[]  = { "/usr/bin/x-terminal-emulator", "-e", "range
 static Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-    { MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+    { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
     { MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
     { MODKEY|ControlMask,           XK_v,      spawn,          {.v = volcmd } },
     { MODKEY|ControlMask,           XK_e,      spawn,          {.v = rangercmd } },
