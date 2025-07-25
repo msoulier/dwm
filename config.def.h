@@ -67,7 +67,8 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+// Use the windows key as the mod key. Use Mod1Mask to set it to Alt.
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
     { MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
     { MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -88,7 +89,7 @@ static const char *rangercmd[]  = { "/usr/bin/x-terminal-emulator", "-e", "range
 static Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-    { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+    { MODKEY                        XK_Return, spawn,          {.v = termcmd } },
     { MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
     { MODKEY|ControlMask,           XK_v,      spawn,          {.v = volcmd } },
     { MODKEY|ControlMask,           XK_e,      spawn,          {.v = rangercmd } },
@@ -128,8 +129,8 @@ static Key keys[] = {
     TAGKEYS(                        XK_7,                      6)
     TAGKEYS(                        XK_8,                      7)
     TAGKEYS(                        XK_9,                      8)
-    { MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-    { MODKEY|ShiftMask,             XK_r,      restart,        {0} },
+    { MODKEY|ControlMask,           XK_q,      quit,           {0} },
+    { MODKEY|ControlMask,           XK_r,      restart,        {0} },
 };
 
 /* button definitions */

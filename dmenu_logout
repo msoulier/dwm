@@ -1,0 +1,9 @@
+#!/bin/sh
+
+ans=$(printf "yes\nno" | dmenu -p "Would you really like to logout?")
+
+if [ "x$ans" = "xyes" ]; then
+    exit 0
+else
+    exit 1
+fi
