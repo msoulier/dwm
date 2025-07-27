@@ -2288,6 +2288,7 @@ void
 restart(const Arg *arg)
 {
     if (prog != NULL) execl(prog, prog, NULL);
+    fputs("warning: restart failed\n", stderr);
 }
 
 int
