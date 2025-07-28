@@ -48,6 +48,7 @@ static const Rule rules[] = {
     { "rakarrack",              NULL,       NULL,       0,            1,           -1 },
     { "qemu-system-x86_64",     NULL,       NULL,       0,            1,           -1 },
     { "audacity",               NULL,       NULL,       0,            1,           -1 },
+    { "davmail-DavGateway",     NULL,       NULL,       0,            1,           -1 },
     //{ "Firefox",    NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
