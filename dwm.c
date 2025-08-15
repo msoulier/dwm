@@ -2288,7 +2288,11 @@ void
 restart(const Arg *arg)
 {
     if (prog != NULL) execl(prog, prog, NULL);
-    fputs("warning: restart failed\n", stderr);
+    if (prog == NULL) {
+        system("rofi -e 'restart failed - prog is NULL'");
+    } else {
+        system("rofi -e 'restart failed - prog is not NULL, don't know why'");
+    }
 }
 
 int

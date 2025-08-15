@@ -9,6 +9,7 @@ OBJ = ${SRC:.c=.o}
 all: options dwm
 
 options:
+	rm -f config.h
 	@echo dwm build options:
 	@echo "CFLAGS   = ${CFLAGS}"
 	@echo "LDFLAGS  = ${LDFLAGS}"
