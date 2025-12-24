@@ -70,6 +70,7 @@ static const Layout layouts[] = {
 /* key definitions */
 // Use the windows key as the mod key. Use Mod1Mask to set it to Alt.
 #define MODKEY Mod4Mask
+#define ALTKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
     { MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
     { MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -100,14 +101,14 @@ static Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-    { MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
-    { MODKEY|ControlMask,           XK_v,      spawn,          {.v = volcmd } },
-    { MODKEY|ControlMask,           XK_e,      spawn,          {.v = filemgr } },
-    { MODKEY|ControlMask,           XK_c,      spawn,          {.v = homecal } },
-    { MODKEY|ControlMask|ShiftMask, XK_c,      spawn,          {.v = workcal } },
-    { MODKEY|ControlMask,           XK_s,      spawn,          {.v = slackcmd } },
-    { MODKEY|ControlMask|ShiftMask, XK_s,      spawn,          {.v = spotifycmd } },
-    { MODKEY|ControlMask,           XK_w,      spawn,          {.v = whatsappcmd } },
+    { ALTKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
+    { ALTKEY|ControlMask,           XK_v,      spawn,          {.v = volcmd } },
+    { ALTKEY|ControlMask,           XK_e,      spawn,          {.v = filemgr } },
+    { ALTKEY|ControlMask,           XK_c,      spawn,          {.v = homecal } },
+    { ALTKEY|ControlMask|ShiftMask, XK_c,      spawn,          {.v = workcal } },
+    { ALTKEY|ControlMask,           XK_s,      spawn,          {.v = slackcmd } },
+    { ALTKEY|ControlMask|ShiftMask, XK_s,      spawn,          {.v = spotifycmd } },
+    { ALTKEY|ControlMask,           XK_w,      spawn,          {.v = whatsappcmd } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = voldowncmd } },
     { 0,                            XF86XK_AudioMute, spawn, {.v = volmuttogglecmd } },
