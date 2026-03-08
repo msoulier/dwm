@@ -80,6 +80,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char *networkcmd[] = { "nm-connection-editor", NULL };
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *lockcmd[]  = { "slock", NULL };
@@ -90,6 +91,7 @@ static const char *workcal[] = { "brave-browser", "--app=https://outlook.office3
 static const char *slackcmd[] = { "brave-browser", "--app=https://app.slack.com/client/T7CAAK9NJ/C7BHR0GMB", NULL };
 static const char *spotifycmd[] = { "chromium", "--app=https://open.spotify.com", NULL };
 static const char *whatsappcmd[] = { "brave-browser", "--app=https://web.whatsapp.com", NULL };
+static const char *heycafecmd[] = { "brave-browser", "--app=https://hey.cafe", NULL };
 static const char *volcmd[] = { "pavucontrol", NULL };
 static const char *volupcmd[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
 static const char *voldowncmd[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
@@ -97,6 +99,7 @@ static const char *volmuttogglecmd[] = { "pactl", "set-sink-mute", "0", "toggle"
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
+    { ALTKEY|ControlMask,           XK_n,      spawn,          {.v = networkcmd } },
     { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
     { ALTKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
@@ -107,6 +110,7 @@ static Key keys[] = {
     { ALTKEY|ControlMask,           XK_s,      spawn,          {.v = slackcmd } },
     { ALTKEY|ControlMask|ShiftMask, XK_s,      spawn,          {.v = spotifycmd } },
     { ALTKEY|ControlMask,           XK_w,      spawn,          {.v = whatsappcmd } },
+    { ALTKEY|ControlMask,           XK_h,      spawn,          {.v = heycafecmd } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = voldowncmd } },
     { 0,                            XF86XK_AudioMute, spawn, {.v = volmuttogglecmd } },
