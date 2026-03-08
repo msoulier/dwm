@@ -47,6 +47,7 @@ static const Rule rules[] = {
     { "pavucontrol",            NULL,       NULL,       0,            1,           -1 },
     { "qemu-system-x86_64",     NULL,       NULL,       0,            1,           -1 },
     { "audacity",               NULL,       NULL,       0,            1,           -1 },
+    { "davmail-DavGateway",     NULL,       NULL,       0,            1,           -1 },
     //{ "Firefox",    NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
@@ -84,8 +85,9 @@ static const char *networkcmd[] = { "nm-connection-editor", NULL };
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *lockcmd[]  = { "slock", NULL };
+static const char *tfilemgr[]  = { "alacritty", "-e", "ranger", NULL };
+static const char *gfilemgr[]  = { "thunar", NULL };
 //static const char *volcmd[]  = { "alacritty", "-e", "pamix", NULL };
-static const char *filemgr[]  = { "thunar", NULL };
 static const char *homecal[] = { "brave-browser", "--app=https://calendar.google.com", NULL };
 static const char *workcal[] = { "brave-browser", "--app=https://outlook.office365.com/calendar/view/week", NULL };
 static const char *slackcmd[] = { "brave-browser", "--app=https://app.slack.com/client/T7CAAK9NJ/C7BHR0GMB", NULL };
@@ -102,9 +104,10 @@ static Key keys[] = {
     { ALTKEY|ControlMask,           XK_n,      spawn,          {.v = networkcmd } },
     { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-    { ALTKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
-    { ALTKEY|ControlMask,           XK_v,      spawn,          {.v = volcmd } },
-    { ALTKEY|ControlMask,           XK_e,      spawn,          {.v = filemgr } },
+    { MODKEY|ControlMask,           XK_l,      spawn,          {.v = lockcmd } },
+    { MODKEY|ControlMask,           XK_v,      spawn,          {.v = volcmd } },
+    { MODKEY|ControlMask,           XK_e,      spawn,          {.v = tfilemgr } },
+    { MODKEY|ControlMask|ShiftMask, XK_e,      spawn,          {.v = gfilemgr } },
     { ALTKEY|ControlMask,           XK_c,      spawn,          {.v = homecal } },
     { ALTKEY|ControlMask|ShiftMask, XK_c,      spawn,          {.v = workcal } },
     { ALTKEY|ControlMask,           XK_s,      spawn,          {.v = slackcmd } },
