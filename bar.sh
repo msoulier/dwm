@@ -2,6 +2,16 @@
 
 # ^c$var^ = fg color
 # ^b$var^ = bg color
+mode="default"
+if [ $# -gt 0 ]; then
+    mode=$1
+fi
+if [ $mode = "-h" ]; then
+    echo "Usage: $0 [mode]"
+    echo "  modes: affogato-homedock affogato-workdock affogato-laptop"
+    echo "         ramirez-homedock ramirez-workdock ramirez-laptop"
+    exit 1
+fi
 
 interval=0
 
@@ -58,6 +68,14 @@ mem() {
   printf "^c$red^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
 }
 
+lan() {
+    iface=$1
+	case "$(cat /sys/class/net/$iface/operstate 2>/dev/null)" in
+	up) printf "^c$black^ ^b$blue^ 󰤨 ^d^%s" " ^c$blue^Connected ($iface)" ;;
+	down) printf "^c$black^ ^b$blue^ 󰤭 ^d^%s" " ^c$blue^Disconnected ($iface)" ;;
+	esac
+}
+
 wlan() {
 	case "$(cat /sys/class/net/wl*/operstate 2>/dev/null)" in
 	up) printf "^c$black^ ^b$blue^ 󰤨 ^d^%s" " ^c$blue^Connected" ;;
@@ -72,8 +90,23 @@ clock() {
 
 while true; do
 
-  [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates)
-  interval=$((interval + 1))
+    [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates)
+    interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+    if [ $mode = "affogato-laptop" ]; then
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+    elif [ $mode = "affogato-workdock" ]; then
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+    elif [ $mode = "affogato-homedock" ]; then
+        sleep 1 && xsetroot -name "$(cpu) $(mem) $(lan enp0s13f0u2u4) $(clock)"
+    elif [ $mode = "ramirez-laptop" ]; then
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+    elif [ $mode = "ramirez-workdock" ]; then
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+    elif [ $mode = "ramirez-homedock" ]; then
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+    else
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+    fi
+
 done
