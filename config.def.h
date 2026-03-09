@@ -94,6 +94,7 @@ static const char *slackcmd[] = { "brave-browser", "--app=https://app.slack.com/
 static const char *spotifycmd[] = { "chromium", "--app=https://open.spotify.com", NULL };
 static const char *whatsappcmd[] = { "brave-browser", "--app=https://web.whatsapp.com", NULL };
 static const char *heycafecmd[] = { "brave-browser", "--app=https://hey.cafe", NULL };
+static const char *feedlycmd[] = { "brave-browser", "--app=https://feedly.com/i/my/me", NULL };
 static const char *volcmd[] = { "pavucontrol", NULL };
 static const char *volupcmd[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
 static const char *voldowncmd[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
