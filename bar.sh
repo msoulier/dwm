@@ -66,8 +66,9 @@ wlan() {
 }
 
 clock() {
+    date_string=$(date +"%a %b %e %Y %H:%M:%S %z")
 	printf "^c$black^ ^b$darkblue^ 󱑆 "
-	printf "^c$black^^b$blue^ $(date)  "
+	printf "^c$black^^b$blue^ $date_string  "
 }
 
 while true; do
