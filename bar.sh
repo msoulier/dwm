@@ -7,11 +7,15 @@ if [ $# -gt 0 ]; then
     mode=$1
 fi
 if [ $mode = "-h" ]; then
-    echo "Usage: $0 [mode]"
+    echo "Usage: $0 [mode] [iface]"
     echo "  modes: affogato-homedock affogato-workdock affogato-laptop"
     echo "         ramirez-homedock ramirez-workdock ramirez-laptop"
     exit 1
 fi
+if [ $# -gt 1 ]; then
+    iface=$2
+fi
+# FIXME: do this right
 
 interval=0
 
@@ -68,19 +72,17 @@ mem() {
   printf "^c$red^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
 }
 
-lan() {
-    iface=$1
-	case "$(cat /sys/class/net/$iface/operstate 2>/dev/null)" in
-	up) printf "^c$black^ ^b$blue^ 󰤨 ^d^%s" " ^c$blue^Connected ($iface)" ;;
-	down) printf "^c$black^ ^b$blue^ 󰤭 ^d^%s" " ^c$blue^Disconnected ($iface)" ;;
-	esac
-}
-
-wlan() {
-	case "$(cat /sys/class/net/wl*/operstate 2>/dev/null)" in
-	up) printf "^c$black^ ^b$blue^ 󰤨 ^d^%s" " ^c$blue^Connected" ;;
-	down) printf "^c$black^ ^b$blue^ 󰤭 ^d^%s" " ^c$blue^Disconnected" ;;
-	esac
+net() {
+    if [ "x$iface" != "x" ]
+    then
+        address=$(/bin/ip -4 addr show $iface | grep "inet " | awk '{print $2}')
+        case "$(cat /sys/class/net/$iface/operstate 2>/dev/null)" in
+        up) printf "^c$black^ ^b$blue^ 󰤨 ^d^%s" " ^c$blue^Connected ($iface) $address" ;;
+        down) printf "^c$black^ ^b$blue^ 󰤭 ^d^%s" " ^c$blue^Disconnected ($iface)" ;;
+        esac
+    else
+        printf "^c$black^ ^b$blue^ 󰤭 ^d^%s" " ^c$blue^Unknown"
+    fi
 }
 
 clock() {
@@ -95,19 +97,19 @@ while true; do
     interval=$((interval + 1))
 
     if [ $mode = "affogato-laptop" ]; then
-        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(net) $(clock)"
     elif [ $mode = "affogato-workdock" ]; then
-        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(net) $(clock)"
     elif [ $mode = "affogato-homedock" ]; then
-        sleep 1 && xsetroot -name "$(cpu) $(mem) $(lan enp0s13f0u2u4) $(clock)"
+        sleep 1 && xsetroot -name "$(cpu) $(mem) $(net) $(clock)"
     elif [ $mode = "ramirez-laptop" ]; then
-        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(net) $(clock)"
     elif [ $mode = "ramirez-workdock" ]; then
-        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(net) $(clock)"
     elif [ $mode = "ramirez-homedock" ]; then
-        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(net) $(clock)"
     else
-        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(wlan) $(clock)"
+        sleep 1 && xsetroot -name "$(cpu) $(battery) $(mem) $(net) $(clock)"
     fi
 
 done
