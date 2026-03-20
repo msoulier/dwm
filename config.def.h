@@ -1,15 +1,23 @@
 /* See LICENSE file for copyright and license details. */
 #include <X11/XF86keysym.h>
 
+#define FONTSIZE 16
+#ifdef HOST
+#if HOST == 1
+#define FONTSIZE 16
+#elif HOST == 2
+#define FONTSIZE 12
+#endif
+#endif
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "JetBrainsMonoNLNerdFontMono:style=Regular:size=16", "monospace:size=16", "status:style=Regular" };
-//static const char *fonts[]          = { "JetBrainsMonoNLNerdFontMono:style=Regular:size=12", "monospace:size=12", "status:style=Regular" };
-static const char dmenufont[]       = "monospace:size=16";
+static const char *fonts[]          = { "JetBrainsMonoNLNerdFontMono:style=Regular:size=FONTSIZE", "monospace:size=FONTSIZE", "status:style=Regular" };
+static const char dmenufont[]       = "monospace:size=FONTSIZE";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";

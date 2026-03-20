@@ -5,6 +5,15 @@ include config.mk
 
 SRC = drw.c dwm.c util.c
 OBJ = ${SRC:.c=.o}
+HOSTNAME = $(shell hostname)
+ifeq ($(HOSTNAME),ramirez)
+	HOST = 1
+	CFLAGS += -DHOST=1
+endif
+ifeq ($(HOSTNAME),affigato)
+	HOST = 2
+	CFLAGS += -DHOST=2
+endif
 
 all: options dwm
 
@@ -13,6 +22,8 @@ options:
 	@echo "CFLAGS   = ${CFLAGS}"
 	@echo "LDFLAGS  = ${LDFLAGS}"
 	@echo "CC       = ${CC}"
+	@echo "HOSTNAME = ${HOSTNAME}"
+	@echo "HOST     = ${HOST}"
 
 .c.o:
 	${CC} -c ${CFLAGS} $<
